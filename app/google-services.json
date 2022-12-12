@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "419578412202",
+    "firebase_url": "https://justair-3e55e-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "justair-3e55e",
+    "storage_bucket": "justair-3e55e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:419578412202:android:d3ff8abea744674ec164d3",
+        "android_client_info": {
+          "package_name": "com.justairapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "419578412202-1plln392d95kdamu2qga5mcg9vtv7sat.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCXbEs08inMGaLEPTh38cZ08dM1_eY005k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "419578412202-1plln392d95kdamu2qga5mcg9vtv7sat.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
