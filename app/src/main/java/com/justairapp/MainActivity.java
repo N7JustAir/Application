@@ -2,7 +2,12 @@ package com.justairapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -18,6 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String CHANNEL_ID = "NOTIF" ;
     private TextView txtCo2;
     private EditText editText;
     private Button btnSend;
@@ -43,8 +49,8 @@ public class MainActivity extends AppCompatActivity {
         dbRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Toast.makeText(MainActivity.this, "Here", Toast.LENGTH_SHORT).show();
                 String co2value = snapshot.child("co2Value").getValue().toString();
+                Toast.makeText(MainActivity.this, "Cédric a pété dans le salon", Toast.LENGTH_SHORT).show();
                 txtCo2.setText("CO₂ : " + co2value);
             }
 
