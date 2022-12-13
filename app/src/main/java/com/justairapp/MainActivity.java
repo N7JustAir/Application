@@ -55,9 +55,21 @@ public class MainActivity extends AppCompatActivity {
         dbRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String co2value = snapshot.child("co2Value").getValue().toString();
-                Toast.makeText(MainActivity.this, "Cédric a pété dans le salon", Toast.LENGTH_SHORT).show();
-                txtCo2.setText("CO₂ : " + co2value);
+                String co2Txt = snapshot.child("co2Value").getValue().toString();
+                float co2value = 0;
+                try {
+                    co2value = Integer.valueOf(co2Txt);
+                    if ((0.0 <= co2value) && (co2value <= 599.0)) {
+                        itemImage.setImageResource(R.drawable.justairfleche);
+                    } else if ((600.0 <= co2value) && (co2value <= 1999.0)) {
+                        itemImage.setImageResource(R.drawable.justairflecheorange);
+                    } else {
+                        itemImage.setImageResource(R.drawable.justairflechered);
+                    }
+                } catch (Exception e) {
+
+                }
+                txtCo2.setText("CO₂ : " + co2value + "ppm");
             }
 
             @Override
