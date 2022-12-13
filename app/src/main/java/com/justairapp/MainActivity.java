@@ -1,17 +1,18 @@
 package com.justairapp;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
+import androidx.appcompat.app.AppCompatDelegate;
 
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.animation.Animation;
+import android.view.animation.RotateAnimation;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView txtCo2;
     private EditText editText;
     private Button btnSend;
+    private ImageView itemImage;
 
     /**
      * Firebase
@@ -35,12 +37,16 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
 
         txtCo2 = (TextView) findViewById(R.id.txtCO2);
         editText = (EditText) findViewById(R.id.editTxt);
         btnSend = (Button) findViewById(R.id.btnSend);
+        itemImage = (ImageView) findViewById(R.id.imageViewOutside);
 
         //Firebase
         //to get a link to our database for the gazMeasures
@@ -72,5 +78,14 @@ public class MainActivity extends AppCompatActivity {
         });
         btnSend.setVisibility(View.INVISIBLE);
         editText.setVisibility(View.INVISIBLE);
+
+        RotateAnimation rotate = new RotateAnimation(
+                0, 360,
+                Animation.RELATIVE_TO_SELF, 0.5f,
+                Animation.RELATIVE_TO_SELF, 0.5f
+        );
+        rotate.setDuration(900);
+        rotate.setRepeatCount(Animation.INFINITE);
+        itemImage.startAnimation(rotate);
     }
 }
