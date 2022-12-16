@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (!(editText.getText().equals(""))) {
-                    //Toast.makeText(MainActivity.this, "Here : " + editText.getText(), Toast.LENGTH_SHORT).show();
+                    //to write data in the online db
                     dbRef.child("co2Value").setValue(editText.getText().toString());
                     Toast.makeText(MainActivity.this, "Send : " + editText.getText(), Toast.LENGTH_SHORT).show();
                 }
@@ -91,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
         btnSend.setVisibility(View.INVISIBLE);
         editText.setVisibility(View.INVISIBLE);
 
+        //Make the logo rotate
         RotateAnimation rotate = new RotateAnimation(
                 0, 360,
                 Animation.RELATIVE_TO_SELF, 0.5f,
