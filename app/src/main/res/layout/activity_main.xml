@@ -27,17 +27,18 @@
         app:srcCompat="@drawable/justairinside" />
 
     <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/caveat"
         android:gravity="center"
         android:text="JustAir"
-        android:textColor="#3D85C6"
+        android:textColor="#30C0FF"
         android:textSize="100sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/txtCO2"
