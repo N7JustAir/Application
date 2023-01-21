@@ -1,20 +1,10 @@
 package com.justairapp;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
-
 import android.app.Activity;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.content.ComponentName;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -22,14 +12,20 @@ import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
+import android.view.animation.TranslateAnimation;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Description;
@@ -47,7 +43,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class Home extends AppCompatActivity {
 
     private static final String CHANNEL_ID = "JustAirNotifId";
     private static final String CHANNEL_NAME = "JustAirNotifName";
@@ -87,11 +83,11 @@ public class MainActivity extends AppCompatActivity {
         spinnerChoiceSensor = (Spinner) findViewById(R.id.chooseSensor);
         sensorList.add("Choose your sensor");
 
-        pref = getSharedPreferences("my_shared_preferences",MODE_PRIVATE);
+        pref = getSharedPreferences("my_shared_preferences", MODE_PRIVATE);
         String whichImage = pref.getString("whichImage", "green");
         if (whichImage.equals("orange")) {
             itemImage.setImageResource(R.drawable.justairflecheorange);
-        } else if (whichImage.equals("red")){
+        } else if (whichImage.equals("red")) {
             itemImage.setImageResource(R.drawable.justairflechered);
         }
 
@@ -108,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
         spinnerChoiceSensor.setAdapter(adapter);
-        spinnerChoiceSensor.setOnItemSelectedListener(new SpinnerActivity());
+        spinnerChoiceSensor.setOnItemSelectedListener(new Home.SpinnerActivity());
 
         /**
          * Firebase RootNode
@@ -263,6 +259,7 @@ public class MainActivity extends AppCompatActivity {
                                 }
                                 info += dataSnapshot.child("gazName").getValue().toString();
                                 LineDataSet lineDataSet = new LineDataSet(dataVals, dataSnapshot.child("gazName").getValue().toString());
+                                lineDataSet.setDrawValues(false);
                                 dataSets.add(lineDataSet);
                                 lineDataSet.setLineWidth(2);
                                 lineDataSet.setDrawCircles(false);
@@ -309,13 +306,13 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = pref.edit();
         if ((0.0 <= co2value) && (co2value <= 599.0)) {
             itemImage.setImageResource(R.drawable.justairfleche);
-            editor.putString("whichImage","green");
+            editor.putString("whichImage", "green");
         } else if ((600.0 <= co2value) && (co2value <= 1999.0)) {
             itemImage.setImageResource(R.drawable.justairflecheorange);
-            editor.putString("whichImage","orange");
+            editor.putString("whichImage", "orange");
         } else {
             itemImage.setImageResource(R.drawable.justairflechered);
-            editor.putString("whichImage","red");
+            editor.putString("whichImage", "red");
             displayNotification("You should open the windows", "Warning");
         }
         editor.commit();
